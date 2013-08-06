@@ -19,7 +19,7 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" textLabel="3Al-7X-bAI" rowHeight="58" style="IBUITableViewCellStyleDefault" id="1rm-MH-8Zj" customClass="SwipeCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" textLabel="3Al-7X-bAI" rowHeight="58" style="IBUITableViewCellStyleDefault" id="1rm-MH-8Zj" customClass="SwipableTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1rm-MH-8Zj" id="LvM-nI-u3o">
@@ -72,28 +72,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Thank you for downloading Or Else" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPp-Se-eCC">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thank you for downloading Or Else" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPp-Se-eCC">
                                 <rect key="frame" x="70" y="72" width="181" height="14"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.019607843140000001" green="0.95294117649999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Before we begin, we need you to answer a few questions" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="257" translatesAutoresizingMaskIntoConstraints="NO" id="wmB-nS-0KS">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Before we begin, we need you to answer a few questions" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="257" translatesAutoresizingMaskIntoConstraints="NO" id="wmB-nS-0KS">
                                 <rect key="frame" x="32" y="94" width="257" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.019607843140000001" green="0.95294117649999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="What is your darkest secret?" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="bHu-on-KTh">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What is your darkest secret?" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="bHu-on-KTh">
                                 <rect key="frame" x="20" y="184" width="280" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.019607843140000001" green="0.95294117649999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="I am a huge Justin Beiber fan, my Facebook password is Beleiber4ever" translatesAutoresizingMaskIntoConstraints="NO" id="r6G-IJ-vyv">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="I am a huge Justin Beiber fan, my Facebook password is Beleiber4ever" translatesAutoresizingMaskIntoConstraints="NO" id="r6G-IJ-vyv">
                                 <rect key="frame" x="0.0" y="245" width="320" height="303"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -102,17 +102,6 @@
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="r6G-IJ-vyv" secondAttribute="bottom" constant="20" symbolic="YES" id="BeJ-dV-Yf8"/>
-                            <constraint firstItem="dPp-Se-eCC" firstAttribute="top" secondItem="Viz-Fo-TAu" secondAttribute="bottom" constant="20" symbolic="YES" id="EJ9-0J-csu"/>
-                            <constraint firstItem="r6G-IJ-vyv" firstAttribute="top" secondItem="bHu-on-KTh" secondAttribute="bottom" constant="8" symbolic="YES" id="FYO-65-AuA"/>
-                            <constraint firstItem="bHu-on-KTh" firstAttribute="centerX" secondItem="dPp-Se-eCC" secondAttribute="centerX" id="Hab-YM-6sG"/>
-                            <constraint firstItem="wmB-nS-0KS" firstAttribute="top" secondItem="dPp-Se-eCC" secondAttribute="bottom" constant="8" symbolic="YES" id="MZ5-X4-cAw"/>
-                            <constraint firstItem="bHu-on-KTh" firstAttribute="leading" secondItem="ox4-uj-Daw" secondAttribute="leading" constant="20" symbolic="YES" id="Sa3-NV-gqq"/>
-                            <constraint firstItem="wmB-nS-0KS" firstAttribute="centerX" secondItem="dPp-Se-eCC" secondAttribute="centerX" id="XvP-EC-RaZ"/>
-                            <constraint firstItem="r6G-IJ-vyv" firstAttribute="leading" secondItem="ox4-uj-Daw" secondAttribute="leading" id="hAd-t8-vC2"/>
-                            <constraint firstAttribute="trailing" secondItem="r6G-IJ-vyv" secondAttribute="trailing" id="qvQ-Zd-o0a"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="FhT-aG-2CZ">
                         <barButtonItem key="rightBarButtonItem" title="Next" id="r3a-Ur-cya">
@@ -175,7 +164,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Sun, 04/08/13 17:00" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aZ6-Gv-9O2">
-                                                    <rect key="frame" x="100" y="7" width="200" height="30"/>
+                                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -223,7 +212,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6MB-uH-0J8">
-                                                    <rect key="frame" x="128" y="7" width="64" height="30"/>
+                                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <state key="normal" title="Add Task">
@@ -247,7 +236,7 @@
                     <navigationItem key="navigationItem" id="STn-kL-sed">
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="8cc-17-7mU">
                             <connections>
-                                <segue destination="xpZ-CV-9hn" kind="unwind" unwindAction="myCancelUnwindSegueCallback:" id="ZdJ-XA-mVZ"/>
+                                <segue destination="xpZ-CV-9hn" kind="unwind" unwindAction="cancelUnwindSegueCallback:" id="ZdJ-XA-mVZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -296,6 +285,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="x1g-QL-FvA"/>
                         <barButtonItem systemItem="done" id="1Vu-Op-7IB"/>
                     </items>
                 </toolbar>
@@ -307,7 +297,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oWy-SE-ync" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="greenrectangle.png" backIndicatorImage="greenrectangle.png" id="n9T-VL-hfm">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n9T-VL-hfm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -330,7 +320,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XUT-Uq-OTP" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="greenrectangle.png" backIndicatorImage="greenrectangle.png" backIndicatorTransitionMaskImage="addTask_button.png" id="k1W-Pd-cm0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k1W-Pd-cm0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1131493747" green="0.83536094429999996" blue="0.38621008400000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -352,7 +342,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u6C-E3-xcG" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" shadowImage="greenrectangle.png" backIndicatorImage="greenrectangle.png" backIndicatorTransitionMaskImage="addTask_button.png" id="Q19-t0-CeM">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q19-t0-CeM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1131493747" green="0.83536094429999996" blue="0.38621008400000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -436,7 +426,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" id="ksI-SI-PZC">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Iuk-AA-A3m">
                             <connections>
-                                <segue destination="zM8-0V-uOa" kind="unwind" unwindAction="myCancelUnwindSegueCallback:" id="pSu-ve-dCg"/>
+                                <segue destination="zM8-0V-uOa" kind="unwind" unwindAction="cancelUnwindSegueCallback:" id="pSu-ve-dCg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -447,10 +437,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <point key="canvasLocation" x="2032" y="816"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="addTask_button.png" width="25" height="25"/>
-        <image name="greenrectangle.png" width="640" height="4"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

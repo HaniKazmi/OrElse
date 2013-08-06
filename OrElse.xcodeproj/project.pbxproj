@@ -26,15 +26,11 @@
 		B92F6A7617AD780E009813D8 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92F6A7517AD780E009813D8 /* CoreDataTableViewController.m */; };
 		B92F6A7C17AD8C2D009813D8 /* TaskListCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92F6A7B17AD8C2D009813D8 /* TaskListCoreDataTableViewController.m */; };
 		B93400E017ADCE0F00214614 /* greenrectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B93400DF17ADCE0F00214614 /* greenrectangle.png */; };
-		B93AC25A17AFF5C40083174B /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25217AFF5C40083174B /* check.png */; };
-		B93AC25B17AFF5C40083174B /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25317AFF5C40083174B /* check@2x.png */; };
-		B93AC25C17AFF5C40083174B /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25417AFF5C40083174B /* clock.png */; };
-		B93AC25D17AFF5C40083174B /* clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25517AFF5C40083174B /* clock@2x.png */; };
 		B93AC25E17AFF5C40083174B /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25617AFF5C40083174B /* cross.png */; };
 		B93AC25F17AFF5C40083174B /* cross@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25717AFF5C40083174B /* cross@2x.png */; };
 		B93AC26017AFF5C40083174B /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25817AFF5C40083174B /* list.png */; };
 		B93AC26117AFF5C40083174B /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25917AFF5C40083174B /* list@2x.png */; };
-		B93AC26917AFFB2F0083174B /* SwipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B93AC26717AFFB2F0083174B /* SwipeCell.m */; };
+		B93AC26917AFFB2F0083174B /* SwipableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B93AC26717AFFB2F0083174B /* SwipableTableViewCell.m */; };
 		B9C3BD0217AEB93400CAF0DD /* AddTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3BD0117AEB93400CAF0DD /* AddTaskTableViewController.m */; };
 		B9C3BD0517AEBDDD00CAF0DD /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3BD0417AEBDDD00CAF0DD /* Task.m */; };
 /* End PBXBuildFile section */
@@ -73,18 +69,13 @@
 		B92F6A7517AD780E009813D8 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		B92F6A7A17AD8C2D009813D8 /* TaskListCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListCoreDataTableViewController.h; sourceTree = "<group>"; };
 		B92F6A7B17AD8C2D009813D8 /* TaskListCoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListCoreDataTableViewController.m; sourceTree = "<group>"; };
-		B93400DF17ADCE0F00214614 /* greenrectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenrectangle.png; sourceTree = "<group>"; };
-		B93AC25217AFF5C40083174B /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
-		B93AC25317AFF5C40083174B /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
-		B93AC25417AFF5C40083174B /* clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock.png; sourceTree = "<group>"; };
-		B93AC25517AFF5C40083174B /* clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock@2x.png"; sourceTree = "<group>"; };
+		B93400DF17ADCE0F00214614 /* greenrectangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenrectangle.png; path = ../greenrectangle.png; sourceTree = "<group>"; };
 		B93AC25617AFF5C40083174B /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
 		B93AC25717AFF5C40083174B /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
 		B93AC25817AFF5C40083174B /* list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list.png; sourceTree = "<group>"; };
 		B93AC25917AFF5C40083174B /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
-		B93AC26617AFFB2F0083174B /* SwipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeCell.h; sourceTree = "<group>"; };
-		B93AC26717AFFB2F0083174B /* SwipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeCell.m; sourceTree = "<group>"; };
-		B93AC26817AFFB2F0083174B /* SwipeCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeCellProtocol.h; sourceTree = "<group>"; };
+		B93AC26617AFFB2F0083174B /* SwipableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipableTableViewCell.h; sourceTree = "<group>"; };
+		B93AC26717AFFB2F0083174B /* SwipableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipableTableViewCell.m; sourceTree = "<group>"; };
 		B9C3BD0017AEB93400CAF0DD /* AddTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskTableViewController.h; sourceTree = "<group>"; };
 		B9C3BD0117AEB93400CAF0DD /* AddTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskTableViewController.m; sourceTree = "<group>"; };
 		B9C3BD0317AEBDDD00CAF0DD /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
@@ -117,6 +108,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B90099AC17B1426200DF8EDF /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B92F6A7A17AD8C2D009813D8 /* TaskListCoreDataTableViewController.h */,
+				B92F6A7B17AD8C2D009813D8 /* TaskListCoreDataTableViewController.m */,
+				B9C3BD0017AEB93400CAF0DD /* AddTaskTableViewController.h */,
+				B9C3BD0117AEB93400CAF0DD /* AddTaskTableViewController.m */,
+				B93AC26617AFFB2F0083174B /* SwipableTableViewCell.h */,
+				B93AC26717AFFB2F0083174B /* SwipableTableViewCell.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		B90099AD17B142BD00DF8EDF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B92F6A4E17AD6FCB009813D8 /* OrElse.xcdatamodeld */,
+				B9C3BD0317AEBDDD00CAF0DD /* Task.h */,
+				B9C3BD0417AEBDDD00CAF0DD /* Task.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		B92F6A2E17AD6FCB009813D8 = {
 			isa = PBXGroup;
 			children = (
@@ -151,23 +165,12 @@
 		B92F6A4217AD6FCB009813D8 /* OrElse */ = {
 			isa = PBXGroup;
 			children = (
-				B92F6A4B17AD6FCB009813D8 /* OrElseAppDelegate.h */,
-				B92F6A7A17AD8C2D009813D8 /* TaskListCoreDataTableViewController.h */,
-				B92F6A7B17AD8C2D009813D8 /* TaskListCoreDataTableViewController.m */,
-				B92F6A4C17AD6FCB009813D8 /* OrElseAppDelegate.m */,
-				B92F6A6F17AD75F7009813D8 /* iPhone.storyboard */,
-				B9C3BD0017AEB93400CAF0DD /* AddTaskTableViewController.h */,
-				B9C3BD0117AEB93400CAF0DD /* AddTaskTableViewController.m */,
-				B92F6A5117AD6FCB009813D8 /* Images.xcassets */,
-				B93400DF17ADCE0F00214614 /* greenrectangle.png */,
-				B93AC26617AFFB2F0083174B /* SwipeCell.h */,
-				B93AC26717AFFB2F0083174B /* SwipeCell.m */,
-				B93AC26817AFFB2F0083174B /* SwipeCellProtocol.h */,
-				B9C3BD0317AEBDDD00CAF0DD /* Task.h */,
-				B93AC25117AFF5C40083174B /* Images */,
-				B9C3BD0417AEBDDD00CAF0DD /* Task.m */,
-				B92F6A4E17AD6FCB009813D8 /* OrElse.xcdatamodeld */,
+				B90099AD17B142BD00DF8EDF /* Model */,
+				B90099AC17B1426200DF8EDF /* Classes */,
 				B92F6A4317AD6FCB009813D8 /* Supporting Files */,
+				B92F6A6F17AD75F7009813D8 /* iPhone.storyboard */,
+				B92F6A5117AD6FCB009813D8 /* Images.xcassets */,
+				B93AC25117AFF5C40083174B /* Images */,
 			);
 			path = OrElse;
 			sourceTree = "<group>";
@@ -175,6 +178,8 @@
 		B92F6A4317AD6FCB009813D8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B92F6A4B17AD6FCB009813D8 /* OrElseAppDelegate.h */,
+				B92F6A4C17AD6FCB009813D8 /* OrElseAppDelegate.m */,
 				B92F6A7417AD780E009813D8 /* CoreDataTableViewController.h */,
 				B92F6A7517AD780E009813D8 /* CoreDataTableViewController.m */,
 				B92F6A4417AD6FCB009813D8 /* OrElse-Info.plist */,
@@ -206,10 +211,7 @@
 		B93AC25117AFF5C40083174B /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				B93AC25217AFF5C40083174B /* check.png */,
-				B93AC25317AFF5C40083174B /* check@2x.png */,
-				B93AC25417AFF5C40083174B /* clock.png */,
-				B93AC25517AFF5C40083174B /* clock@2x.png */,
+				B93400DF17ADCE0F00214614 /* greenrectangle.png */,
 				B93AC25617AFF5C40083174B /* cross.png */,
 				B93AC25717AFF5C40083174B /* cross@2x.png */,
 				B93AC25817AFF5C40083174B /* list.png */,
@@ -225,6 +227,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B92F6A6917AD6FCB009813D8 /* Build configuration list for PBXNativeTarget "OrElse" */;
 			buildPhases = (
+				B90099AB17B1362900DF8EDF /* ShellScript */,
 				B92F6A3317AD6FCB009813D8 /* Sources */,
 				B92F6A3417AD6FCB009813D8 /* Frameworks */,
 				B92F6A3517AD6FCB009813D8 /* Resources */,
@@ -296,16 +299,12 @@
 			files = (
 				B93AC25E17AFF5C40083174B /* cross.png in Resources */,
 				B92F6A7017AD76AD009813D8 /* iPhone.storyboard in Resources */,
-				B93AC25A17AFF5C40083174B /* check.png in Resources */,
 				B93400E017ADCE0F00214614 /* greenrectangle.png in Resources */,
 				B93AC26117AFF5C40083174B /* list@2x.png in Resources */,
 				B92F6A4717AD6FCB009813D8 /* InfoPlist.strings in Resources */,
 				B93AC25F17AFF5C40083174B /* cross@2x.png in Resources */,
 				B92F6A5217AD6FCB009813D8 /* Images.xcassets in Resources */,
-				B93AC25D17AFF5C40083174B /* clock@2x.png in Resources */,
-				B93AC25C17AFF5C40083174B /* clock.png in Resources */,
 				B93AC26017AFF5C40083174B /* list.png in Resources */,
-				B93AC25B17AFF5C40083174B /* check@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,6 +318,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B90099AB17B1362900DF8EDF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "bN=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbN=$((bN += 1))\nbN=$(printf \"%d\" $bN)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $bN\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B92F6A3317AD6FCB009813D8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -329,7 +344,7 @@
 				B9C3BD0217AEB93400CAF0DD /* AddTaskTableViewController.m in Sources */,
 				B92F6A5017AD6FCB009813D8 /* OrElse.xcdatamodeld in Sources */,
 				B92F6A7617AD780E009813D8 /* CoreDataTableViewController.m in Sources */,
-				B93AC26917AFFB2F0083174B /* SwipeCell.m in Sources */,
+				B93AC26917AFFB2F0083174B /* SwipableTableViewCell.m in Sources */,
 				B92F6A7C17AD8C2D009813D8 /* TaskListCoreDataTableViewController.m in Sources */,
 				B92F6A4917AD6FCB009813D8 /* main.m in Sources */,
 			);

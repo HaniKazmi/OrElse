@@ -9,11 +9,11 @@
 #import "AddTaskTableViewController.h"
 #import "Task.h"
 
+
 @interface AddTaskTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *taskTextField;
 
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
 @property (strong, nonatomic) IBOutlet UIDatePicker *taskDatePicker;
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *notesTextField;
 
 @end
+
 
 @implementation AddTaskTableViewController
 
@@ -42,11 +43,10 @@
     [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
-    self.dateLabel.text = [self.dateFormatter stringFromDate:[NSDate date]];
-    
     self.dateTextField.text = [self.dateFormatter stringFromDate:[NSDate date]];
     [self.dateTextField setInputView:self.taskDatePicker];
     [self.dateTextField setInputAccessoryView:self.datePickerToolbar];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -66,13 +66,13 @@
 }
 
 - (IBAction)addTask:(UIButton *)sender {
-    NSManagedObjectContext *context = [self managedObjectContext];
-    Task *currentTask = [NSEntityDescription
-                         insertNewObjectForEntityForName:@"Task"
-                         inManagedObjectContext:context];
-
-    
     if (![self.taskTextField.text isEqualToString:@""]) {
+        NSManagedObjectContext *context = [self managedObjectContext];
+        Task *currentTask = [NSEntityDescription
+                             insertNewObjectForEntityForName:@"Task"
+                             inManagedObjectContext:context];
+
+        
         currentTask.name = self.taskTextField.text;
         currentTask.isCompleted = [NSNumber numberWithBool:NO];
         currentTask.date = [self.dateFormatter dateFromString:self.dateTextField.text];

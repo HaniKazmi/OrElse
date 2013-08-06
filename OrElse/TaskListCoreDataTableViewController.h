@@ -7,11 +7,11 @@
 //
 
 #import "CoreDataTableViewController.h"
-#import "SwipeCellProtocol.h"
+#import "SwipableTableViewCell.h"
 
-@interface TaskListCoreDataTableViewController : CoreDataTableViewController <SwipeCellProtocol>
 
-- (IBAction)myCancelUnwindSegueCallback:(UIStoryboardSegue *)segue;
-- (IBAction)mySaveUnwindSegueCallback:(UIStoryboardSegue *)segue;
+@interface TaskListCoreDataTableViewController : CoreDataTableViewController <SwipeableTableViewCellProtocol>
+
+- (IBAction)cancelUnwindSegueCallback:(UIStoryboardSegue *)segue;
 
 @end
