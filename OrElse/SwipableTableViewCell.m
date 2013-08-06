@@ -89,7 +89,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
     leftShadow.startPoint = kShadowRightPoint;
     leftShadow.endPoint = kShadowLeftPoint;
     leftShadow.colors = shadowColorArray;
-    [_topView.layer addSublayer:leftShadow];
+    [self.topView.layer addSublayer:leftShadow];
     
     // Add right shadow
     CAGradientLayer *rightShadow = [CAGradientLayer layer];
@@ -100,7 +100,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
     rightShadow.startPoint = kShadowLeftPoint;
     rightShadow.endPoint = kShadowRightPoint;
     rightShadow.colors = shadowColorArray;
-    [_topView.layer addSublayer:rightShadow];
+    [self.topView.layer addSublayer:rightShadow];
 }
 
 - (void)layoutSwipeView
@@ -135,7 +135,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
 -(IBAction)didSwipeRightInCell:(id)sender
 {
     // Inform the delegate of the right swipe
-    [delegate didSwipeRightInCellWithIndexPath:_indexPath];
+    [delegate didSwipeRightInCellWithIndexPath:self.indexPath];
     
     if (self.cellDirection == SwipeCellDirectionLeft) {
         
@@ -144,7 +144,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
         // Swipe top view left
         [UIView animateWithDuration:0.50
                          animations:^{
-                             [_topView setFrame:CGRectMake(kSwipeButtonWidth,
+                             [self.topView setFrame:CGRectMake(kSwipeButtonWidth,
                                                            0,
                                                            self.contentView.frame.size.width,
                                                            self.contentView.frame.size.height)];
@@ -152,7 +152,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
                          completion:^(BOOL finished) {
                              // Bounce lower view
                              [UIView animateWithDuration:0.10 animations:^{
-                                 [_topView setFrame:CGRectMake(64,
+                                 [self.topView setFrame:CGRectMake(64,
                                                                0,
                                                                self.contentView.frame.size.width,
                                                                self.contentView.frame.size.height)];
@@ -166,7 +166,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
 {
     [UIView animateWithDuration:0.5
                      animations:^{
-                         [_topView setFrame:CGRectMake(0,
+                         [self.topView setFrame:CGRectMake(0,
                                                        0,
                                                        self.contentView.frame.size.width,
                                                        self.contentView.frame.size.height)];
@@ -174,7 +174,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
                      // Bounce lower view
                      completion:^(BOOL finished) {
                          [UIView animateWithDuration:0.15 animations:^{
-                             [_topView setFrame:CGRectMake(0,
+                             [self.topView setFrame:CGRectMake(0,
                                                            0,
                                                            self.contentView.frame.size.width,
                                                            self.contentView.frame.size.height)];
@@ -186,7 +186,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
 -(IBAction)didSwipeLeftInCell:(id)sender
 {
     // Inform the delegate of the left swipe
-    [delegate didSwipeLeftInCellWithIndexPath:_indexPath];
+    [delegate didSwipeLeftInCellWithIndexPath:self.indexPath];
     
     if (self.cellDirection == SwipeCellDirectionRight) {
         [self returnCellToCentre];
@@ -194,7 +194,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
         // Swipe top view left
         [UIView animateWithDuration:0.50
                          animations:^{
-                             [_topView setFrame:CGRectMake(-kSwipeButtonWidth,
+                             [self.topView setFrame:CGRectMake(-kSwipeButtonWidth,
                                                            0,
                                                            self.contentView.frame.size.width,
                                                            self.contentView.frame.size.height)];
@@ -202,7 +202,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
                          } completion:^(BOOL finished) {
                              // Bounce lower view
                              [UIView animateWithDuration:0.10 animations:^{
-                                 [_topView setFrame:CGRectMake(-64,
+                                 [self.topView setFrame:CGRectMake(-64,
                                                                0,
                                                                self.contentView.frame.size.width,
                                                                self.contentView.frame.size.height)];

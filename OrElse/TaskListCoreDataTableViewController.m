@@ -93,29 +93,29 @@ static float const kTableViewRowHeight = 58.0;
 
 - (void)didSwipeRightInCellWithIndexPath:(NSIndexPath *)indexPath
 {
-    if ([_swipedCell compare:indexPath] != NSOrderedSame) {
+    if ([self.swipedCell compare:indexPath] != NSOrderedSame) {
 
         // Unswipe the currently swiped cell
-        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:_swipedCell];
+        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:self.swipedCell];
         [currentlySwipedCell returnCellToCentre];
     }
     
-    // Set the _swipedCell property
-    _swipedCell = indexPath;
+    // Set the swipedCell property
+    self.swipedCell = indexPath;
 }
 
 - (void)didSwipeLeftInCellWithIndexPath:(NSIndexPath *)indexPath{
     
-    if ([_swipedCell compare:indexPath] != NSOrderedSame) {
+    if ([self.swipedCell compare:indexPath] != NSOrderedSame) {
         
         // Unswipe the currently swiped cell
-        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:_swipedCell];
+        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:self.swipedCell];
         [currentlySwipedCell returnCellToCentre];
         
     }
     
-    // Set the _swipedCell property
-    _swipedCell = indexPath;
+    // Set the swipedCell property
+    self.swipedCell = indexPath;
 }
 
 
