@@ -10,6 +10,9 @@
 #import "Task.h"
 
 
+static float const kTableViewRowHeight = 58.0;
+
+
 @interface TaskListCoreDataTableViewController ()
 
 @property (weak, nonatomic) NSManagedObjectContext *managedObjectContext;
@@ -79,8 +82,6 @@
     
     return cell;
 }
-
-#define kTableViewRowHeight 58
 
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

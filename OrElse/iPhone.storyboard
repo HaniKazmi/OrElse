@@ -19,24 +19,39 @@
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" textLabel="3Al-7X-bAI" rowHeight="58" style="IBUITableViewCellStyleDefault" id="1rm-MH-8Zj" customClass="SwipableTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" rowHeight="58" id="1rm-MH-8Zj" customClass="SwipableTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1rm-MH-8Zj" id="LvM-nI-u3o">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Al-7X-bAI">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="57"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <gestureRecognizers/>
-                                            <fontDescription key="fontDescription" name="HiraKakuProN-W6" family="Hiragino Kaku Gothic ProN" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YyM-bs-OIw">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJg-Pe-piK">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNC-wf-5Lm">
+                                                    <rect key="frame" x="20" y="18" width="280" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </subviews>
                                     <gestureRecognizers/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="swipeView" destination="YyM-bs-OIw" id="qHg-S9-6TP"/>
+                                    <outlet property="textLabel" destination="lNC-wf-5Lm" id="ePi-N7-Dsl"/>
+                                    <outlet property="topView" destination="eJg-Pe-piK" id="HTC-iM-IU5"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -170,6 +185,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <action selector="dissmissKeyboard:" destination="fFk-KJ-CAB" eventType="editingDidEnd" id="Qnb-Fj-riz"/>
                                                         <action selector="updateDateTextField:" destination="fFk-KJ-CAB" eventType="valueChanged" id="KUE-Oe-6ri"/>
                                                     </connections>
                                                 </textField>
@@ -241,10 +257,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="datePicker" destination="I1w-jM-dRo" id="0gS-mB-InW"/>
                         <outlet property="datePickerToolbar" destination="oRj-Hi-Ktq" id="gz0-xd-g7Y"/>
                         <outlet property="dateTextField" destination="aZ6-Gv-9O2" id="jXR-Mq-5Mp"/>
                         <outlet property="notesTextField" destination="TXl-xY-KKf" id="Lif-Sm-KCG"/>
-                        <outlet property="taskDatePicker" destination="I1w-jM-dRo" id="Usa-1J-6gI"/>
                         <outlet property="taskTextField" destination="PMq-8O-16b" id="vAd-TB-DoR"/>
                     </connections>
                 </tableViewController>
@@ -286,7 +302,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="x1g-QL-FvA"/>
-                        <barButtonItem systemItem="done" id="1Vu-Op-7IB"/>
+                        <barButtonItem systemItem="done" id="1Vu-Op-7IB">
+                            <connections>
+                                <action selector="dissmissDatePicker:" destination="fFk-KJ-CAB" id="HbF-0l-OMv"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
             </objects>

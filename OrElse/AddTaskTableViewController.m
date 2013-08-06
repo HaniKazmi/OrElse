@@ -12,12 +12,14 @@
 
 @interface AddTaskTableViewController ()
 
+@property (weak, nonatomic) NSManagedObjectContext *managedObjectContext;
+
 @property (weak, nonatomic) IBOutlet UITextField *taskTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
-@property (strong, nonatomic) IBOutlet UIDatePicker *taskDatePicker;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIToolbar *datePickerToolbar;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @property (weak, nonatomic) IBOutlet UITextField *notesTextField;
 
@@ -26,156 +28,90 @@
 
 @implementation AddTaskTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+#pragma mark - Properties
+
+- (NSManagedObjectContext *)managedObjectContext
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+    if (!_managedObjectContext) {
+        id delegate = [[UIApplication sharedApplication] delegate];
+        if ([delegate performSelector:@selector(managedObjectContext)]) {
+            _managedObjectContext = [delegate managedObjectContext];
+        }
     }
-    return self;
+    
+    return _managedObjectContext;
 }
+
+- (NSDateFormatter *)dateFormatter
+{
+    // Set the date style to display
+    if (!_dateFormatter) {
+        _dateFormatter = [[NSDateFormatter alloc] init];
+        [_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [_dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    }
+    
+    return _dateFormatter;
+}
+
+
+#pragma mark - View Lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.dateFormatter = [[NSDateFormatter alloc] init];
-    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
+    // Hookup datePicker to its textField
     self.dateTextField.text = [self.dateFormatter stringFromDate:[NSDate date]];
-    [self.dateTextField setInputView:self.taskDatePicker];
+    [self.dateTextField setInputView:self.datePicker];
     [self.dateTextField setInputAccessoryView:self.datePickerToolbar];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 
-- (IBAction)dissmissKeyboard:(UITextField *)sender {
+#pragma mark - IBActions
+
+- (IBAction)dissmissKeyboard:(UITextField *)sender
+{
     [sender resignFirstResponder];
 }
 
-- (void)didReceiveMemoryWarning
+- (IBAction)dissmissDatePicker:(UIBarButtonItem *)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.dateTextField resignFirstResponder];
 }
 
-- (IBAction)addTask:(UIButton *)sender {
-    if (![self.taskTextField.text isEqualToString:@""]) {
-        NSManagedObjectContext *context = [self managedObjectContext];
+- (IBAction)updateDateTextField:(UIDatePicker *)sender
+{
+    self.dateTextField.text = [self.dateFormatter stringFromDate:[self.datePicker date]];
+}
+
+- (IBAction)addTask:(UIButton *)sender
+{
+    // Ensure the task field is not empty
+    if ([self.taskTextField.text length]) {
+        
+        // Insert new task into model
+        NSManagedObjectContext *context = self.managedObjectContext;
         Task *currentTask = [NSEntityDescription
                              insertNewObjectForEntityForName:@"Task"
                              inManagedObjectContext:context];
 
-        
+        // Set the task's fields
         currentTask.name = self.taskTextField.text;
         currentTask.isCompleted = [NSNumber numberWithBool:NO];
         currentTask.date = [self.dateFormatter dateFromString:self.dateTextField.text];
         currentTask.notes = self.notesTextField.text;
         
+        // Save model
         NSError *error;
         if (![context save:&error]) {
             NSLog(@"Couldn't save: %@", [error localizedDescription]);
         }
         
+        // Return to previous view
         [self dismissViewControllerAnimated:YES completion:nil];
     }
 
 }
-- (IBAction)updateDateTextField:(UIDatePicker *)sender {
-    self.dateTextField.text = [self.dateFormatter stringFromDate:[self.taskDatePicker date]];
-}
-
-
-- (NSManagedObjectContext *)managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication] delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
-#pragma mark - Table view data source
-
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//#warning Potentially incomplete method implementation.
-//    // Return the number of sections.
-//    return 0;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//#warning Incomplete method implementation.
-//    // Return the number of rows in the section.
-//    return 0;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-//    
-//    // Configure the cell...
-//    
-//    return cell;
-//}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-
- */
 
 @end
