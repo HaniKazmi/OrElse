@@ -22,7 +22,6 @@
 		B92F6A5C17AD6FCB009813D8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B92F6A4017AD6FCB009813D8 /* CoreData.framework */; };
 		B92F6A6417AD6FCB009813D8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B92F6A6217AD6FCB009813D8 /* InfoPlist.strings */; };
 		B92F6A6617AD6FCB009813D8 /* OrElseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B92F6A6517AD6FCB009813D8 /* OrElseTests.m */; };
-		B92F6A7017AD76AD009813D8 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B92F6A6F17AD75F7009813D8 /* iPhone.storyboard */; };
 		B92F6A7617AD780E009813D8 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92F6A7517AD780E009813D8 /* CoreDataTableViewController.m */; };
 		B92F6A7C17AD8C2D009813D8 /* TaskListCoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B92F6A7B17AD8C2D009813D8 /* TaskListCoreDataTableViewController.m */; };
 		B93400E017ADCE0F00214614 /* greenrectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = B93400DF17ADCE0F00214614 /* greenrectangle.png */; };
@@ -31,6 +30,7 @@
 		B93AC26017AFF5C40083174B /* list.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25817AFF5C40083174B /* list.png */; };
 		B93AC26117AFF5C40083174B /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B93AC25917AFF5C40083174B /* list@2x.png */; };
 		B93AC26917AFFB2F0083174B /* SwipableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B93AC26717AFFB2F0083174B /* SwipableTableViewCell.m */; };
+		B9B635C217B31C9F000FF2C9 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9B635C117B31C9F000FF2C9 /* iPhone.storyboard */; };
 		B9C3BD0217AEB93400CAF0DD /* AddTaskTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3BD0117AEB93400CAF0DD /* AddTaskTableViewController.m */; };
 		B9C3BD0517AEBDDD00CAF0DD /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = B9C3BD0417AEBDDD00CAF0DD /* Task.m */; };
 /* End PBXBuildFile section */
@@ -64,7 +64,6 @@
 		B92F6A6117AD6FCB009813D8 /* OrElseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OrElseTests-Info.plist"; sourceTree = "<group>"; };
 		B92F6A6317AD6FCB009813D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B92F6A6517AD6FCB009813D8 /* OrElseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OrElseTests.m; sourceTree = "<group>"; };
-		B92F6A6F17AD75F7009813D8 /* iPhone.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		B92F6A7417AD780E009813D8 /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
 		B92F6A7517AD780E009813D8 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		B92F6A7A17AD8C2D009813D8 /* TaskListCoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListCoreDataTableViewController.h; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		B93AC25917AFF5C40083174B /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
 		B93AC26617AFFB2F0083174B /* SwipableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipableTableViewCell.h; sourceTree = "<group>"; };
 		B93AC26717AFFB2F0083174B /* SwipableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipableTableViewCell.m; sourceTree = "<group>"; };
+		B9B635C117B31C9F000FF2C9 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		B9C3BD0017AEB93400CAF0DD /* AddTaskTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskTableViewController.h; sourceTree = "<group>"; };
 		B9C3BD0117AEB93400CAF0DD /* AddTaskTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskTableViewController.m; sourceTree = "<group>"; };
 		B9C3BD0317AEBDDD00CAF0DD /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
@@ -168,8 +168,8 @@
 				B90099AD17B142BD00DF8EDF /* Model */,
 				B90099AC17B1426200DF8EDF /* Classes */,
 				B92F6A4317AD6FCB009813D8 /* Supporting Files */,
-				B92F6A6F17AD75F7009813D8 /* iPhone.storyboard */,
 				B92F6A5117AD6FCB009813D8 /* Images.xcassets */,
+				B9B635C117B31C9F000FF2C9 /* iPhone.storyboard */,
 				B93AC25117AFF5C40083174B /* Images */,
 			);
 			path = OrElse;
@@ -298,9 +298,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B93AC25E17AFF5C40083174B /* cross.png in Resources */,
-				B92F6A7017AD76AD009813D8 /* iPhone.storyboard in Resources */,
 				B93400E017ADCE0F00214614 /* greenrectangle.png in Resources */,
 				B93AC26117AFF5C40083174B /* list@2x.png in Resources */,
+				B9B635C217B31C9F000FF2C9 /* iPhone.storyboard in Resources */,
 				B92F6A4717AD6FCB009813D8 /* InfoPlist.strings in Resources */,
 				B93AC25F17AFF5C40083174B /* cross@2x.png in Resources */,
 				B92F6A5217AD6FCB009813D8 /* Images.xcassets in Resources */,
@@ -465,6 +465,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OrElse/OrElse-Prefix.pch";
 				INFOPLIST_FILE = "OrElse/OrElse-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -479,6 +480,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OrElse/OrElse-Prefix.pch";
 				INFOPLIST_FILE = "OrElse/OrElse-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

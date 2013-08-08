@@ -10,6 +10,7 @@
 
 
 static CGFloat const kSwipeButtonWidth = 68.0;
+static CGFloat const kSwipeButtoBounceWidth = kSwipeButtonWidth - 4.0;
 
 static CGFloat const kShadowWidth = 10.0;
 static CGPoint const kShadowRightPoint = {1.0, 0.5};
@@ -18,8 +19,8 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
 
 @interface SwipableTableViewCell ()
 
-@property (nonatomic, strong) IBOutlet UIView *swipeView;
-@property (nonatomic, strong) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIView *swipeView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 
 @end
 
@@ -42,44 +43,49 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
+ //           [self layoutSwipeView];
         // Set default swipe position
         self.cellDirection = SwipeCellDirectionNone;
-        
         // Create the gesture recognizers
         UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(didSwipeRightInCell:)];
         [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
-        
+
         UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self
                                                                                         action:@selector(didSwipeLeftInCell:)];
         [swipeLeft setDirection:UISwipeGestureRecognizerDirectionLeft];
-        
+
         [self addGestureRecognizer:swipeRight];
         [self addGestureRecognizer:swipeLeft];
     }
-    
+
     return self;
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+
     // Add drop shadow to the top view
     [self layoutTopView];
-    
+
     // Add buttons to the swipe view
     [self layoutSwipeView];
-    
     // Prevent selection highlighting
     //  [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 }
 
 - (void)layoutTopView
 {
+    for (CALayer *layer in [self.topView.layer.sublayers copy]) {
+        if ([layer isKindOfClass:[CAGradientLayer class]]) {
+            [layer removeFromSuperlayer];
+        }
+    }
+
     NSArray *shadowColorArray = @[(id)[[UIColor colorWithWhite:0.0 alpha:0.4f] CGColor],
                                   (id)[[UIColor clearColor] CGColor]];
-    
+
     // Add left shadow
     CAGradientLayer *leftShadow = [CAGradientLayer layer];
     leftShadow.frame = CGRectMake(-kShadowWidth,
@@ -90,7 +96,7 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
     leftShadow.endPoint = kShadowLeftPoint;
     leftShadow.colors = shadowColorArray;
     [self.topView.layer addSublayer:leftShadow];
-    
+
     // Add right shadow
     CAGradientLayer *rightShadow = [CAGradientLayer layer];
     rightShadow.frame = CGRectMake(self.topView.frame.size.width,
@@ -106,27 +112,32 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
 - (void)layoutSwipeView
 {
     // Remove previous subviews
-    [[self.swipeView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    // Add tick image to right
-    UIImage *tickImage = [UIImage imageNamed:@"Check"];
-    UIButton *tickButton = [[UIButton alloc] initWithFrame:CGRectMake(0,
-                                                                      0,
-                                                                      kSwipeButtonWidth,
-                                                                      self.swipeView.frame.size.height)];
-    [tickButton setImage:tickImage forState:UIControlStateNormal];
-    tickButton.backgroundColor = [UIColor greenColor];
-    [self.swipeView addSubview:tickButton];
-    
-    // Add clock image to left
-    UIImage *timeImage = [UIImage imageNamed:@"Clock"];
-    UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.swipeView.frame.size.width - 68,
-                                                                      0,
-                                                                      kSwipeButtonWidth,
-                                                                      self.swipeView.frame.size.height)];
-    [timeButton setImage:timeImage forState:UIControlStateNormal];
-    timeButton.backgroundColor = [UIColor blueColor];
-    [self.swipeView addSubview:timeButton];
+            [[self.swipeView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    if (![self isSelected]) {
+
+
+        // Add tick image to right
+        UIImage *tickImage = [UIImage imageNamed:@"Check"];
+        UIButton *tickButton = [[UIButton alloc] initWithFrame:CGRectMake(0,
+                                                                          0,
+                                                                          kSwipeButtonWidth,
+                                                                          self.swipeView.frame.size.height)];
+        [tickButton setImage:tickImage forState:UIControlStateNormal];
+        tickButton.backgroundColor = [UIColor greenColor];
+        [self.swipeView addSubview:tickButton];
+
+        // Add clock image to left
+        UIImage *timeImage = [UIImage imageNamed:@"Clock"];
+        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.swipeView.frame.size.width - 68,
+                                                                          0,
+                                                                          kSwipeButtonWidth,
+                                                                          self.swipeView.frame.size.height)];
+//        self.swipeView.alpha = 0.0;
+        [timeButton setImage:timeImage forState:UIControlStateNormal];
+        timeButton.backgroundColor = [UIColor blueColor];
+        [self.swipeView addSubview:timeButton];
+    }
+
 }
 
 
@@ -136,27 +147,29 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
 {
     // Inform the delegate of the right swipe
     [delegate didSwipeRightInCellWithIndexPath:self.indexPath];
-    
+
     if (self.cellDirection == SwipeCellDirectionLeft) {
-        
+
         [self returnCellToCentre];
     } else {
         // Swipe top view left
-        [UIView animateWithDuration:0.50
+        [UIView animateWithDuration:0.5
                          animations:^{
+                             self.swipeView.alpha = 1.0;
                              [self.topView setFrame:CGRectMake(kSwipeButtonWidth,
-                                                           0,
-                                                           self.contentView.frame.size.width,
-                                                           self.contentView.frame.size.height)];
-                         }
-                         completion:^(BOOL finished) {
-                             // Bounce lower view
-                             [UIView animateWithDuration:0.10 animations:^{
-                                 [self.topView setFrame:CGRectMake(64,
                                                                0,
                                                                self.contentView.frame.size.width,
                                                                self.contentView.frame.size.height)];
-                             }];
+                         }
+                         completion:^(BOOL finished) {
+                             // Bounce lower view
+                             [UIView animateWithDuration:0.10
+                                              animations:^{
+                                                  [self.topView setFrame:CGRectMake(kSwipeButtoBounceWidth,
+                                                                                    0,
+                                                                                    self.contentView.frame.size.width,
+                                                                                    self.contentView.frame.size.height)];
+                                              }];
                          }];
         self.cellDirection = SwipeCellDirectionRight;
     }
@@ -164,49 +177,54 @@ static CGPoint const kShadowLeftPoint = {0.0, 0.5};
 
 - (void)returnCellToCentre
 {
-    [UIView animateWithDuration:0.5
+    [UIView animateWithDuration:0.50
                      animations:^{
+                         self.swipeView.alpha = 0.0;
                          [self.topView setFrame:CGRectMake(0,
-                                                       0,
-                                                       self.contentView.frame.size.width,
-                                                       self.contentView.frame.size.height)];
-                     }
-                     // Bounce lower view
-                     completion:^(BOOL finished) {
-                         [UIView animateWithDuration:0.15 animations:^{
-                             [self.topView setFrame:CGRectMake(0,
                                                            0,
                                                            self.contentView.frame.size.width,
                                                            self.contentView.frame.size.height)];
-                         }];
+                     }
+     // Bounce lower view
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.15
+                                          animations:^{
+                                              [self.topView setFrame:CGRectMake(0,
+                                                                                0,
+                                                                                self.contentView.frame.size.width,
+                                                                                self.contentView.frame.size.height)];
+                                          }];
                      }];
     self.cellDirection = SwipeCellDirectionNone;
 }
 
--(IBAction)didSwipeLeftInCell:(id)sender
+- (IBAction)didSwipeLeftInCell:(id)sender
 {
     // Inform the delegate of the left swipe
     [delegate didSwipeLeftInCellWithIndexPath:self.indexPath];
-    
+
     if (self.cellDirection == SwipeCellDirectionRight) {
         [self returnCellToCentre];
     } else {
         // Swipe top view left
-        [UIView animateWithDuration:0.50
+        [UIView animateWithDuration:1.0
                          animations:^{
+                             self.swipeView.alpha = 1.0;
                              [self.topView setFrame:CGRectMake(-kSwipeButtonWidth,
-                                                           0,
-                                                           self.contentView.frame.size.width,
-                                                           self.contentView.frame.size.height)];
-                             
-                         } completion:^(BOOL finished) {
-                             // Bounce lower view
-                             [UIView animateWithDuration:0.10 animations:^{
-                                 [self.topView setFrame:CGRectMake(-64,
+
                                                                0,
                                                                self.contentView.frame.size.width,
                                                                self.contentView.frame.size.height)];
-                             }];
+
+                         } completion:^(BOOL finished) {
+                             // Bounce lower view
+                             [UIView animateWithDuration:0.10
+                                              animations:^{
+                                                  [self.topView setFrame:CGRectMake(-kSwipeButtoBounceWidth,
+                                                                                    0,
+                                                                                    self.contentView.frame.size.width,
+                                                                                    self.contentView.frame.size.height)];
+                                              }];
                          }];
         self.cellDirection = SwipeCellDirectionLeft;
     }

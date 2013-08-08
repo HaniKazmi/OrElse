@@ -17,9 +17,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *taskTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
-@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (strong, nonatomic) IBOutlet UIToolbar *datePickerToolbar;
-@property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UIToolbar *datePickerToolbar;
+@property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
 @property (weak, nonatomic) IBOutlet UITextField *notesTextField;
 

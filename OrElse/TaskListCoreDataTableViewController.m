@@ -16,7 +16,7 @@ static float const kTableViewRowHeight = 58.0;
 @interface TaskListCoreDataTableViewController ()
 
 @property (weak, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) NSIndexPath *swipedCell;
+@property (strong, nonatomic) NSIndexPath *previouslySwipedCellIndexPath;
 
 @end
 
@@ -74,7 +74,6 @@ static float const kTableViewRowHeight = 58.0;
     
     SwipableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
-    // Setup cell
     Task *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = task.name;
     cell.indexPath = indexPath;
@@ -93,29 +92,29 @@ static float const kTableViewRowHeight = 58.0;
 
 - (void)didSwipeRightInCellWithIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.swipedCell compare:indexPath] != NSOrderedSame) {
+    if ([self.previouslySwipedCellIndexPath compare:indexPath] != NSOrderedSame) {
 
         // Unswipe the currently swiped cell
-        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:self.swipedCell];
+        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:self.previouslySwipedCellIndexPath];
         [currentlySwipedCell returnCellToCentre];
     }
     
     // Set the swipedCell property
-    self.swipedCell = indexPath;
+    self.previouslySwipedCellIndexPath = indexPath;
 }
 
 - (void)didSwipeLeftInCellWithIndexPath:(NSIndexPath *)indexPath{
     
-    if ([self.swipedCell compare:indexPath] != NSOrderedSame) {
+    if ([self.previouslySwipedCellIndexPath compare:indexPath] != NSOrderedSame) {
         
         // Unswipe the currently swiped cell
-        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:self.swipedCell];
+        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:self.previouslySwipedCellIndexPath];
         [currentlySwipedCell returnCellToCentre];
         
     }
     
     // Set the swipedCell property
-    self.swipedCell = indexPath;
+    self.previouslySwipedCellIndexPath = indexPath;
 }
 
 
