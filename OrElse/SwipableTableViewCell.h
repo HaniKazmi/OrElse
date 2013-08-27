@@ -18,8 +18,7 @@ typedef NS_ENUM(NSUInteger, SwipeCellDirection) {
 
 @protocol SwipeableTableViewCellProtocol <NSObject>
 
--(void)didSwipeRightInCellWithIndexPath:(NSIndexPath *)indexPath;
--(void)didSwipeLeftInCellWithIndexPath:(NSIndexPath *)indexPath;
+-(void)didSwipeCellWithIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -31,8 +30,6 @@ typedef NS_ENUM(NSUInteger, SwipeCellDirection) {
 @property (weak, nonatomic) id <SwipeableTableViewCellProtocol> delegate;
 @property (assign, nonatomic) SwipeCellDirection cellDirection;
 
-- (IBAction)didSwipeRightInCell:(id)sender;
-- (IBAction)didSwipeLeftInCell:(id)sender;
 - (void)returnCellToCentre;
 
 @end

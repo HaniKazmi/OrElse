@@ -90,20 +90,7 @@ static float const kTableViewRowHeight = 58.0;
 
 #pragma mark - SwipeableTableViewCell Delegate
 
-- (void)didSwipeRightInCellWithIndexPath:(NSIndexPath *)indexPath
-{
-    if ([self.previouslySwipedCellIndexPath compare:indexPath] != NSOrderedSame) {
-
-        // Unswipe the currently swiped cell
-        SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:self.previouslySwipedCellIndexPath];
-        [currentlySwipedCell returnCellToCentre];
-    }
-    
-    // Set the swipedCell property
-    self.previouslySwipedCellIndexPath = indexPath;
-}
-
-- (void)didSwipeLeftInCellWithIndexPath:(NSIndexPath *)indexPath{
+- (void)didSwipeCellWithIndexPath:(NSIndexPath *)indexPath{
     
     if ([self.previouslySwipedCellIndexPath compare:indexPath] != NSOrderedSame) {
         
