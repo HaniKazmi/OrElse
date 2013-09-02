@@ -10,120 +10,115 @@
 
 
 static CGFloat const kSwipeButtonWidth = 68.0;
+static NSTimeInterval const kReturnSwipeDuration = 0.20;
 
 
 @interface SwipableTableViewCell ()
 
-@property (weak, nonatomic) IBOutlet UIView *swipeView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
 
 @property (assign, nonatomic) CGPoint originalCentre;
 @property (strong, nonatomic) UIButton* timeButton;
+
 @end
 
 
 @implementation SwipableTableViewCell
 
-@synthesize delegate;
-
 #pragma mark - Properties
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
+    if (self.cellDirection == SwipeCellDirectionNone) {
+        [super setSelected:selected animated:animated];
+    } else {
+  //      [self returnCellToCentre];
+    }
 }
+
 
 #pragma mark - View Lifecycle
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+-(void)awakeFromNib
 {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        //           [self layoutSwipeView];
-        // Set default swipe position
-        self.cellDirection = SwipeCellDirectionNone;
-        // Create the gesture recognizers
+    [super awakeFromNib];
 
-        UIPanGestureRecognizer *gestureRecoginizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                             action:@selector(handlePan:)];
+    // Set default swipe position
+    self.cellDirection = SwipeCellDirectionNone;
 
-        [self addGestureRecognizer:gestureRecoginizer];
-    }
-
-    return self;
-}
-
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-
-    // Add buttons to the swipe view
+    // Add buttons to swipe view
     [self layoutSwipeView];
-    // Prevent selection highlighting
-    //  [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+
+    // Create the gesture recognizer
+    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                                 action:@selector(handlePan:)];
+    recognizer.delegate = self;
+    [self addGestureRecognizer:recognizer];
 }
 
 - (void)layoutSwipeView
 {
-    // Remove previous subviews
-    [[self.swipeView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    if (![self isSelected]) {
+    CGSize topViewSize = self.topView.frame.size;
 
+    // Add tick image to right
+    UIImage *tickImage = [UIImage imageNamed:@"Check"];
 
-        // Add tick image to right
-        UIImage *tickImage = [UIImage imageNamed:@"Check"];
-        UIButton *tickButton = [[UIButton alloc] initWithFrame:CGRectMake(-self.topView.frame.size.width,
-                                                                          0,
-                                                                          self.topView.frame.size.width,
-                                                                          self.swipeView.frame.size.height)];
-        [tickButton setImage:tickImage forState:UIControlStateNormal];
-        tickButton.backgroundColor = [UIColor greenColor];
-        tickButton.imageView.center = CGPointMake(self.topView.frame.size.width - kSwipeButtonWidth/2, tickButton.center.y);
-        [self.topView addSubview:tickButton];
+    UIButton *tickButton = [[UIButton alloc] initWithFrame:CGRectMake(-topViewSize.width,
+                                                                      0,
+                                                                      topViewSize.width,
+                                                                      topViewSize.height)];
+    [tickButton setImage:tickImage forState:UIControlStateNormal];
+    tickButton.backgroundColor = [UIColor greenColor];
+    tickButton.imageView.center = CGPointMake(topViewSize.width - kSwipeButtonWidth/2, tickButton.center.y);
+    [tickButton addTarget:self action:@selector(didPressLeftCellButton:) forControlEvents:UIControlEventTouchDown];
+    [self.topView addSubview:tickButton];
 
-        // Add clock image to left
-        UIImage *timeImage = [UIImage imageNamed:@"Clock"];
-        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(self.swipeView.frame.size.width,
-                                                                          0,
-                                                                          self.topView.frame.size.width,
-                                                                          self.swipeView.frame.size.height)];
-        //        self.swipeView.alpha = 0.0;
-        [timeButton setImage:timeImage forState:UIControlStateNormal];
-        timeButton.backgroundColor = [UIColor blueColor];
-                timeButton.imageEdgeInsets = UIEdgeInsetsMake(0, -68, 0, 68);
-        timeButton.imageView.center = CGPointMake(kSwipeButtonWidth/2, timeButton.center.y);
-        [self.topView addSubview:timeButton];
-        self.timeButton = timeButton;
+    // Add clock image to left
+    UIImage *timeImage = [UIImage imageNamed:@"Clock"];
+    UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(topViewSize.width,
+                                                                      0,
+                                                                      topViewSize.width,
+                                                                      topViewSize.height)];
+
+    [timeButton setImage:timeImage forState:UIControlStateNormal];
+    timeButton.backgroundColor = [UIColor blueColor];
+    timeButton.imageView.center = CGPointMake(kSwipeButtonWidth/2, timeButton.center.y);
+    [self.topView addSubview:timeButton];
+    self.timeButton = timeButton;
+}
+
+-(void)didPressLeftCellButton:(id)sender{
+    NSLog(@"as");
+
+}
+#pragma mark - Gesture Delegates
+
+-(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer{
+
+    if ([[gestureRecognizer class] isKindOfClass:[UIPanGestureRecognizer class]]) {
+        CGPoint translation = [gestureRecognizer translationInView:[self superview]];
+        // Check for horizontal gesture
+        return fabsf(translation.x) > fabsf(translation.y) ? YES : NO;
     }
 
+    return YES;
 }
 
-
-#pragma mark - Gesture delegates
-
--(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
-
-    CGPoint translation = [gestureRecognizer translationInView:[self superview]];
-    // Check for horizontal gesture
-    return fabsf(translation.x) > fabsf(translation.y) ? YES : NO;
-}
-
--(void)handlePan:(UIPanGestureRecognizer *)recognizer {
-
+-(void)handlePan:(UIPanGestureRecognizer *)recognizer
+{
+    // If the gesture has just started, reset cell to default and record the current centre location
     if (recognizer.state == UIGestureRecognizerStateBegan) {
-        // if the gesture has just started, record the current centre location
         self.originalCentre = self.topView.center;
-
+        [self setSelected:NO];
         [self.delegate didSwipeCellWithIndexPath:self.indexPath];
     }
 
-    // 2
-    if (recognizer.state == UIGestureRecognizerStateChanged) {
-        // translate the center
+    else if (recognizer.state == UIGestureRecognizerStateChanged) {
+        // Translate the center
         CGPoint translation = [recognizer translationInView:self];
         self.topView.center = CGPointMake(self.originalCentre.x + translation.x, self.originalCentre.y);
-        // determine whether the item has been dragged far enough to initiate a delete / complete
+
+        // Determine whether the item has been dragged far enough to initiate an action
         if (self.topView.frame.origin.x < -kSwipeButtonWidth) {
             self.cellDirection = SwipeCellDirectionLeft;
         } else if (self.topView.frame.origin.x > kSwipeButtonWidth) {
@@ -131,57 +126,50 @@ static CGFloat const kSwipeButtonWidth = 68.0;
         } else {
             self.cellDirection = SwipeCellDirectionNone;
         }
+
         float cueAlpha = fabsf(self.topView.frame.origin.x) / kSwipeButtonWidth;
         self.timeButton.alpha = cueAlpha;
     }
 
-    // 3
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-        // the frame this cell would have had before being dragged
-        CGRect originalFrame = CGRectMake(0, self.topView.frame.origin.y,
-                                          self.topView.bounds.size.width, self.topView.bounds.size.height);
+    else if (recognizer.state == UIGestureRecognizerStateEnded) {
 
-        if (self.cellDirection == SwipeCellDirectionNone) {
-            // if the item is not being deleted, snap back to the original location
-            [UIView animateWithDuration:0.2
-                             animations:^{
-                                 self.topView.frame = originalFrame;
-                             }
-             ];
-        } else if (self.cellDirection == SwipeCellDirectionRight){
-            [UIView animateWithDuration:0.10
-                             animations:^{
-                                 [self.topView setFrame:CGRectMake(kSwipeButtonWidth,
-                                                                   0,
-                                                                   self.contentView.frame.size.width,
-                                                                   self.contentView.frame.size.height)];
-                             }];
-        } else if (self.cellDirection == SwipeCellDirectionLeft){
+        // Final position of frame for each option
+        CGFloat (^value)(SwipeCellDirection) = ^(SwipeCellDirection direction){
+            switch (direction) {
+                case SwipeCellDirectionLeft:
+                    return -kSwipeButtonWidth;
 
-            [UIView animateWithDuration:0.2
-                             animations:^{
-                                 [self.topView setFrame:CGRectMake(-kSwipeButtonWidth,
-                                                                   0,
-                                                                   self.contentView.frame.size.width,
-                                                                   self.contentView.frame.size.height)];
-                             }
-             ];
+                case SwipeCellDirectionRight:
+                    return kSwipeButtonWidth;
 
-        }
+                default:
+                    return self.frame.origin.x;
+            }
+        };
 
-
+        // Animate the topview after dragging has finished
+        [UIView animateWithDuration:kReturnSwipeDuration
+                         animations:^{
+                             [self.topView setFrame:CGRectMake(value(self.cellDirection),
+                                                               self.topView.frame.origin.y,
+                                                               self.topView.frame.size.width,
+                                                               self.topView.frame.size.height)];
+                         }];
     }
 }
+
+
+#pragma mark - Protocol Delegates
 
 - (void)returnCellToCentre
 {
     [UIView animateWithDuration:0.50
                      animations:^{
-                   //      self.swipeView.alpha = 0.0;
+                         //      self.swipeView.alpha = 0.0;
                          [self.topView setFrame:CGRectMake(0,
                                                            0,
-                                                           self.contentView.frame.size.width,
-                                                           self.contentView.frame.size.height)];
+                                                           self.topView.frame.size.width,
+                                                           self.topView.frame.size.height)];
 
                      }];
     self.cellDirection = SwipeCellDirectionNone;

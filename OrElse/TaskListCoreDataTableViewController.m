@@ -29,11 +29,9 @@ static float const kTableViewRowHeight = 58.0;
 {
     if (!_managedObjectContext) {
         id delegate = [[UIApplication sharedApplication] delegate];
-        if ([delegate performSelector:@selector(managedObjectContext)]) {
-            _managedObjectContext = [delegate managedObjectContext];
-        }
+        _managedObjectContext = [delegate managedObjectContext];
     }
-    
+
     return _managedObjectContext;
 }
 
@@ -53,7 +51,7 @@ static float const kTableViewRowHeight = 58.0;
                                                                         managedObjectContext:self.managedObjectContext
                                                                           sectionNameKeyPath:nil
                                                                                    cacheName:@"DatabaseCache"];
-    
+
     // Start initial setup if first launch
     if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
         [self performSegueWithIdentifier:@"setupSegue" sender:self];
@@ -71,14 +69,14 @@ static float const kTableViewRowHeight = 58.0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"taskCell";
-    
+
     SwipableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
     Task *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = task.name;
     cell.indexPath = indexPath;
     cell.delegate = self;
-    
+
     return cell;
 }
 
@@ -91,17 +89,21 @@ static float const kTableViewRowHeight = 58.0;
 #pragma mark - SwipeableTableViewCell Delegate
 
 - (void)didSwipeCellWithIndexPath:(NSIndexPath *)indexPath{
-    
+
     if ([self.previouslySwipedCellIndexPath compare:indexPath] != NSOrderedSame) {
-        
+
         // Unswipe the currently swiped cell
         SwipableTableViewCell *currentlySwipedCell = (SwipableTableViewCell *)[self.tableView cellForRowAtIndexPath:self.previouslySwipedCellIndexPath];
         [currentlySwipedCell returnCellToCentre];
-        
+
     }
-    
+
     // Set the swipedCell property
     self.previouslySwipedCellIndexPath = indexPath;
+}
+
+- (void)didPressLeftCellButton:(id)sender{
+    NSLog(@"test");
 }
 
 

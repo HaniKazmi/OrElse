@@ -26,11 +26,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YyM-bs-OIw">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        </view>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJg-Pe-piK">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,7 +43,6 @@
                                     <gestureRecognizers/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="swipeView" destination="YyM-bs-OIw" id="qHg-S9-6TP"/>
                                     <outlet property="textLabel" destination="lNC-wf-5Lm" id="ePi-N7-Dsl"/>
                                     <outlet property="topView" destination="eJg-Pe-piK" id="HTC-iM-IU5"/>
                                 </connections>

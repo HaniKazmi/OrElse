@@ -34,11 +34,9 @@
 {
     if (!_managedObjectContext) {
         id delegate = [[UIApplication sharedApplication] delegate];
-        if ([delegate performSelector:@selector(managedObjectContext)]) {
-            _managedObjectContext = [delegate managedObjectContext];
-        }
+        _managedObjectContext = [delegate managedObjectContext];
     }
-    
+
     return _managedObjectContext;
 }
 
@@ -98,7 +96,7 @@
 
         // Set the task's fields
         currentTask.name = self.taskTextField.text;
-        currentTask.isCompleted = [NSNumber numberWithBool:NO];
+        currentTask.isCompleted = @NO;
         currentTask.date = [self.dateFormatter dateFromString:self.dateTextField.text];
         currentTask.notes = self.notesTextField.text;
         
