@@ -32,7 +32,7 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
     if (self.cellDirection == SwipeCellDirectionNone) {
         [super setSelected:selected animated:animated];
     } else {
-  //      [self returnCellToCentre];
+        [self returnCellToCentre];
     }
 }
 
@@ -56,40 +56,46 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
     [self addGestureRecognizer:recognizer];
 }
 
+#define ktopViewSize self.topView.frame.size.width/3
+#define kTopViewBounds self.topView.bounds
 - (void)layoutSwipeView
 {
-    CGSize topViewSize = self.topView.frame.size;
-
     // Add tick image to right
     UIImage *tickImage = [UIImage imageNamed:@"Check"];
-
-    UIButton *tickButton = [[UIButton alloc] initWithFrame:CGRectMake(-topViewSize.width,
-                                                                      0,
-                                                                      topViewSize.width,
-                                                                      topViewSize.height)];
+    UIButton *tickButton = [[UIButton alloc] initWithFrame:CGRectMake(kTopViewBounds.origin.x,
+                                                                      kTopViewBounds.origin.y,
+                                                                      ktopViewSize,
+                                                                      kTopViewBounds.size.height)];
     [tickButton setImage:tickImage forState:UIControlStateNormal];
     tickButton.backgroundColor = [UIColor greenColor];
-    tickButton.imageView.center = CGPointMake(topViewSize.width - kSwipeButtonWidth/2, tickButton.center.y);
-    [tickButton addTarget:self action:@selector(didPressLeftCellButton:) forControlEvents:UIControlEventTouchDown];
+    tickButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    tickButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kSwipeButtonWidth-tickImage.size.width)/2);
+    [tickButton addTarget:self.delegate action:@selector(didPressLeftCellButton:) forControlEvents:UIControlEventTouchDown];
     [self.topView addSubview:tickButton];
 
     // Add clock image to left
     UIImage *timeImage = [UIImage imageNamed:@"Clock"];
-    UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(topViewSize.width,
-                                                                      0,
-                                                                      topViewSize.width,
-                                                                      topViewSize.height)];
+    UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(2 * ktopViewSize,
+                                                                      kTopViewBounds.origin.y,
+                                                                      kTopViewBounds.size.width,
+                                                                      kTopViewBounds.size.height)];
 
     [timeButton setImage:timeImage forState:UIControlStateNormal];
     timeButton.backgroundColor = [UIColor blueColor];
-    timeButton.imageView.center = CGPointMake(kSwipeButtonWidth/2, timeButton.center.y);
+    timeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    timeButton.imageEdgeInsets = UIEdgeInsetsMake(0, (kSwipeButtonWidth-timeImage.size.width)/2, 0, 0);
+    [timeButton addTarget:self action:@selector(didPressRightCellButton) forControlEvents:UIControlEventTouchDown];
     [self.topView addSubview:timeButton];
     self.timeButton = timeButton;
 }
 
--(void)didPressLeftCellButton:(id)sender{
+-(void)didPressLeftCellButton
+{
     NSLog(@"as");
-
+}
+-(void)didPressRightCellButton
+{
+    NSLog(@"eas");
 }
 #pragma mark - Gesture Delegates
 
@@ -119,9 +125,9 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
         self.topView.center = CGPointMake(self.originalCentre.x + translation.x, self.originalCentre.y);
 
         // Determine whether the item has been dragged far enough to initiate an action
-        if (self.topView.frame.origin.x < -kSwipeButtonWidth) {
+        if (self.topView.frame.origin.x > -ktopViewSize + kSwipeButtonWidth) {
             self.cellDirection = SwipeCellDirectionLeft;
-        } else if (self.topView.frame.origin.x > kSwipeButtonWidth) {
+        } else if (self.topView.frame.origin.x < -ktopViewSize - kSwipeButtonWidth) {
             self.cellDirection = SwipeCellDirectionRight;
         } else {
             self.cellDirection = SwipeCellDirectionNone;
@@ -137,10 +143,10 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
         CGFloat (^value)(SwipeCellDirection) = ^(SwipeCellDirection direction){
             switch (direction) {
                 case SwipeCellDirectionLeft:
-                    return -kSwipeButtonWidth;
+                    return kSwipeButtonWidth;
 
                 case SwipeCellDirectionRight:
-                    return kSwipeButtonWidth;
+                    return -kSwipeButtonWidth;
 
                 default:
                     return self.frame.origin.x;
@@ -150,7 +156,7 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
         // Animate the topview after dragging has finished
         [UIView animateWithDuration:kReturnSwipeDuration
                          animations:^{
-                             [self.topView setFrame:CGRectMake(value(self.cellDirection),
+                             [self.topView setFrame:CGRectMake(value(self.cellDirection) - ktopViewSize,
                                                                self.topView.frame.origin.y,
                                                                self.topView.frame.size.width,
                                                                self.topView.frame.size.height)];
@@ -166,11 +172,11 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
     [UIView animateWithDuration:0.50
                      animations:^{
                          //      self.swipeView.alpha = 0.0;
-                         [self.topView setFrame:CGRectMake(0,
-                                                           0,
+                         [self.topView setFrame:CGRectMake(-ktopViewSize,
+                                                           self.topView.frame.origin.y,
                                                            self.topView.frame.size.width,
                                                            self.topView.frame.size.height)];
-
+                         
                      }];
     self.cellDirection = SwipeCellDirectionNone;
 }
