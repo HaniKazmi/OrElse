@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, SwipeCellDirection) {
 
 @interface SwipableTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+@property (strong, nonatomic) IBOutlet UILabel *taskLabel;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (weak, nonatomic) id <SwipeableTableViewCellProtocol> delegate;
 @property (assign, nonatomic) SwipeCellDirection cellDirection;

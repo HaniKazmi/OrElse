@@ -73,7 +73,7 @@ static float const kTableViewRowHeight = 58.0;
     SwipableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
 
     Task *task = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = task.name;
+    cell.taskLabel.text = task.name;
     cell.indexPath = indexPath;
     cell.delegate = self;
 
@@ -103,7 +103,7 @@ static float const kTableViewRowHeight = 58.0;
 }
 
 - (void)didPressLeftCellButton:(id)sender{
-    NSLog(@"test");
+    [self.managedObjectContext deleteObject:[self.fetchedResultsController objectAtIndexPath:self.previouslySwipedCellIndexPath]];
 }
 
 

@@ -29,21 +29,12 @@
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eJg-Pe-piK">
                                             <rect key="frame" x="-320" y="0.0" width="960" height="57"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Task" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNC-wf-5Lm">
-                                                    <rect key="frame" x="340" y="18" width="280" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
                                     </subviews>
                                     <gestureRecognizers/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="textLabel" destination="lNC-wf-5Lm" id="ePi-N7-Dsl"/>
                                     <outlet property="topView" destination="eJg-Pe-piK" id="HTC-iM-IU5"/>
                                 </connections>
                             </tableViewCell>

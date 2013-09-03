@@ -36,6 +36,14 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
     }
 }
 
+- (UILabel *)taskLabel
+{
+    if (!_taskLabel) {
+        _taskLabel = [[UILabel alloc] initWithFrame:CGRectMake(340, 0, 280, 57.5)];
+    }
+    return _taskLabel;
+}
+
 
 #pragma mark - View Lifecycle
 
@@ -54,6 +62,7 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
                                                                                  action:@selector(handlePan:)];
     recognizer.delegate = self;
     [self addGestureRecognizer:recognizer];
+    [self.topView addSubview:self.taskLabel];
 }
 
 #define ktopViewSize self.topView.frame.size.width/3
@@ -69,7 +78,10 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
     [tickButton setImage:tickImage forState:UIControlStateNormal];
     tickButton.backgroundColor = [UIColor greenColor];
     tickButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    tickButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kSwipeButtonWidth-tickImage.size.width)/2);
+    tickButton.imageEdgeInsets = UIEdgeInsetsMake(0,
+                                                  0,
+                                                  0,
+                                                  (kSwipeButtonWidth-tickImage.size.width)/2);
     [tickButton addTarget:self.delegate action:@selector(didPressLeftCellButton:) forControlEvents:UIControlEventTouchDown];
     [self.topView addSubview:tickButton];
 
@@ -83,20 +95,21 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
     [timeButton setImage:timeImage forState:UIControlStateNormal];
     timeButton.backgroundColor = [UIColor blueColor];
     timeButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    timeButton.imageEdgeInsets = UIEdgeInsetsMake(0, (kSwipeButtonWidth-timeImage.size.width)/2, 0, 0);
+    timeButton.imageEdgeInsets = UIEdgeInsetsMake(0,
+                                                  (kSwipeButtonWidth-timeImage.size.width)/2,
+                                                  0,
+                                                  0);
     [timeButton addTarget:self action:@selector(didPressRightCellButton) forControlEvents:UIControlEventTouchDown];
     [self.topView addSubview:timeButton];
     self.timeButton = timeButton;
 }
 
--(void)didPressLeftCellButton
-{
-    NSLog(@"as");
-}
 -(void)didPressRightCellButton
 {
     NSLog(@"eas");
 }
+
+
 #pragma mark - Gesture Delegates
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer{
@@ -133,7 +146,7 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
             self.cellDirection = SwipeCellDirectionNone;
         }
 
-        float cueAlpha = fabsf(self.topView.frame.origin.x) / kSwipeButtonWidth;
+        float cueAlpha = fabsf((self.topView.frame.origin.x + ktopViewSize) / kSwipeButtonWidth);
         self.timeButton.alpha = cueAlpha;
     }
 
@@ -148,6 +161,7 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
                 case SwipeCellDirectionRight:
                     return -kSwipeButtonWidth;
 
+                case SwipeCellDirectionNone:
                 default:
                     return self.frame.origin.x;
             }
@@ -157,9 +171,9 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
         [UIView animateWithDuration:kReturnSwipeDuration
                          animations:^{
                              [self.topView setFrame:CGRectMake(value(self.cellDirection) - ktopViewSize,
-                                                               self.topView.frame.origin.y,
-                                                               self.topView.frame.size.width,
-                                                               self.topView.frame.size.height)];
+                                                               kTopViewBounds.origin.y,
+                                                               kTopViewBounds.size.width,
+                                                               kTopViewBounds.size.height)];
                          }];
     }
 }
@@ -173,9 +187,9 @@ static NSTimeInterval const kReturnSwipeDuration = 0.20;
                      animations:^{
                          //      self.swipeView.alpha = 0.0;
                          [self.topView setFrame:CGRectMake(-ktopViewSize,
-                                                           self.topView.frame.origin.y,
-                                                           self.topView.frame.size.width,
-                                                           self.topView.frame.size.height)];
+                                                           kTopViewBounds.origin.y,
+                                                           kTopViewBounds.size.width,
+                                                           kTopViewBounds.size.height)];
                          
                      }];
     self.cellDirection = SwipeCellDirectionNone;
